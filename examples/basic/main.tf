@@ -1,0 +1,38 @@
+terraform {
+  required_version = ">= 1.5"
+
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = ">= 3.0"
+    }
+  }
+}
+
+provider "azurerm" {
+  features {}
+}
+
+module "aks" {
+  source = "../.."
+
+  name                = "example-aks"
+  resource_group_name = "example-rg"
+  location            = "eastus"
+  dns_prefix          = "exampleaks"
+
+  default_node_pool = {
+    name       = "system"
+    vm_size    = "Standard_D2s_v5"
+    node_count = 2
+  }
+
+  tags = {
+    Environment = "sandbox"
+    ManagedBy   = "terraform"
+  }
+}
+
+output "aks_fqdn" {
+  value = module.aks.fqdn
+}
