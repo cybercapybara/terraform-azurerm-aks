@@ -9,7 +9,7 @@ exposes the API server FQDN and a sensitive kubeconfig output.
 
 ```hcl
 module "aks" {
-  source = "github.com/cybercapybara/terraform-azurerm-aks"
+  source = "github.com/moveeeax/terraform-azurerm-aks"
 
   name                = "prod-aks"
   resource_group_name = "prod-rg"
